@@ -3,7 +3,7 @@
 from time import sleep
 import RPi.GPIO as gpio
 
-class Lockbox(pin=3):
+class Lockbox:
     def __init__(self, pin=3):
         self.unlock_pin = pin
         self.setup(pin)
@@ -14,10 +14,10 @@ class Lockbox(pin=3):
         gpio.setup(self.unlock_pin, gpio.OUT)
 
     def unlock_box(self):
-            self.toggle_lock(True)
+            self.toggle_lock(False)
 
     def lock_box(self):
-            self.toggle_lock(False)
+            self.toggle_lock(True)
 
     def toggle_lock(self, unlock):
         gpio.output(self.unlock_pin, unlock)

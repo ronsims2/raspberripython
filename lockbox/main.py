@@ -6,6 +6,7 @@ from lockbox import Lockbox
 #intitalize the lockbox controller on the Raspberry Pi
 lb = Lockbox()
 lb.setup()
+lb.lock_box()
 
 app = Flask(__name__)
 
@@ -25,10 +26,16 @@ def attempt_unlock(lock_code):
 
     elif lock_code == 105:
         lb.cycle_lock()
+
         return 'Cycling lock...'
+
+    elif lock_code == 79:
+        lb.lock_box()
+
+        return 'locking box'
     else:
         return 'Invalid attempt.'
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0')
 
